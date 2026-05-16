@@ -37,3 +37,4 @@ _package/
 .idea
 build*
 cmake-build-*
+archlinux.bat
