@@ -38,3 +38,4 @@ _package/
 build*
 cmake-build-*
 archlinux.bat
+AGENTS.md
