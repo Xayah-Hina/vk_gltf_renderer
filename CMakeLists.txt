@@ -5,15 +5,27 @@ project(vk_gltf_renderer_rewrite LANGUAGES C CXX)
 # ============================================================================
 # Options
 # ============================================================================
-option(NVPRO2_ENABLE_nvgl "Enable nvgl from nvpro_core2" OFF)
 option(USE_DEFAULT_SCENE "Using a default scene at startup" ON)
 option(USE_OPTIX_DENOISER "Use OptiX denoiser as alternative to DLSS" ON)
 option(USE_DRACO "Use Draco for compression" ON)
 option(USE_DLSS "Use DLSS-RR for denoising" ON)
 
-# This project carries local replacements for these nvpro_core2 components.
-option(NVPRO2_ENABLE_nvvkgltf "Enable nvvkgltf from nvpro_core2" OFF)
-option(NVPRO2_ENABLE_nvvkglsl "Enable nvvkglsl from nvpro_core2" OFF)
+# nvpro_core2 is opt-in for this renderer: enable only libraries used by the target.
+set(NVPRO2_ENABLE_DEFAULT OFF CACHE BOOL "Disable nvpro_core2 default component set" FORCE)
+set(NVPRO2_ENABLE_nvimageformats ON CACHE BOOL "Enable nvimageformats from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvutils ON CACHE BOOL "Enable nvutils from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvapp ON CACHE BOOL "Enable nvapp from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvgui ON CACHE BOOL "Enable nvgui from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvgpu_monitor ON CACHE BOOL "Enable nvgpu_monitor from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvvk ON CACHE BOOL "Enable nvvk from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvshaders_host ON CACHE BOOL "Enable nvshaders_host from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvaftermath ON CACHE BOOL "Enable nvaftermath from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvslang ON CACHE BOOL "Enable nvslang from nvpro_core2" FORCE)
+
+set(NVPRO2_ENABLE_nvgl OFF CACHE BOOL "Disable unused nvgl from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvvkglsl OFF CACHE BOOL "Disable unused nvvkglsl from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvvkgltf OFF CACHE BOOL "Disable unused nvvkgltf from nvpro_core2" FORCE)
+set(NVPRO2_ENABLE_nvnsight OFF CACHE BOOL "Disable unused nvnsight from nvpro_core2" FORCE)
 
 
 # ============================================================================
