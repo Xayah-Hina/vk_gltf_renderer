@@ -20,10 +20,30 @@ option(NVPRO2_ENABLE_nvvkglsl "Enable nvvkglsl from nvpro_core2" OFF)
 # Dependencies
 # ============================================================================
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(Vulkan 1.4 REQUIRED)
-find_package(NvproCore2 REQUIRED)
+
+find_path(
+        NvproCore2_ROOT
+        NAMES nvpro_core2/cmake/Setup.cmake
+        PATHS
+        ${CMAKE_BINARY_DIR}/_deps
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/..
+        ${CMAKE_CURRENT_SOURCE_DIR}/../..
+)
+
+if (NOT NvproCore2_ROOT)
+    message(FATAL_ERROR
+            "nvpro_core2 was not found. Keep nvpro_core2 as a sibling checkout "
+            "or pass -DNvproCore2_ROOT=<directory containing nvpro_core2>."
+    )
+endif ()
+
+message(STATUS "Found nvpro_core2 at: ${NvproCore2_ROOT}")
+set(NVPRO_CORE2_OUTPUT_DIR "${CMAKE_BINARY_DIR}")
+set(NVPRO_CORE2_DOWNLOAD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources")
+include(${NvproCore2_ROOT}/nvpro_core2/cmake/Setup.cmake)
 
 # nvpro_core2's current nvvk/swapchain.cpp uses std::clamp without directly including <algorithm>.
 # GCC 16 no longer sees that symbol through transitive includes; keep the workaround local to nvvk.
@@ -264,11 +284,6 @@ if (USE_DLSS)
 endif ()
 
 
-# ============================================================================
-# Runtime Files
-# ============================================================================
-download_files(FILENAMES daytime.hdr std_env.hdr)
-
 function(copy_existing_runtime_files TARGET_NAME)
     foreach (RUNTIME_FILE IN LISTS ARGN)
         if (RUNTIME_FILE AND EXISTS "${RUNTIME_FILE}")
@@ -296,5 +311,4 @@ if (WIN32)
             COMMAND_EXPAND_LISTS
     )
 
-    target_sources(${PROJECT_NAME} PRIVATE resource.rc)
 endif ()

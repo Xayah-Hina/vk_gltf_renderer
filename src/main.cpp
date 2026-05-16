@@ -39,24 +39,8 @@
 #include <nvvk/validation_settings.hpp>
 
 #include "renderer.hpp"
-#include "docs/app_icon_png.h"
 
 nvutils::ProfilerManager g_profilerManager;  // #PROFILER
-
-//////////////////////////////////////////////////////////////////////////
-// Create and set the window icon
-static void setWindowIcon(GLFWwindow* window)
-{
-  GLFWimage icon{};
-  int       channels = 0;
-  icon.pixels        = stbi_load_from_memory(app_icon_png, app_icon_png_len, &icon.width, &icon.height, &channels, 4);
-  if(icon.pixels)
-  {
-    glfwSetWindowIcon(window, 1, &icon);  // Set icon to window
-    glfwPollEvents();                     // Force icon to be immediately shown
-    stbi_image_free(icon.pixels);
-  }
-}
 
 //////////////////////////////////////////////////////////////////////////
 ///
@@ -317,12 +301,6 @@ auto main(int argc, char** argv) -> int
   // Create the application
   nvapp::Application app;
   app.init(appInfo);
-
-  // Set the window icon
-  if(!appInfo.headless)
-  {
-    setWindowIcon(app.getWindowHandle());
-  }
 
   elemGltfRenderer->registerRecentFilesHandler();
 

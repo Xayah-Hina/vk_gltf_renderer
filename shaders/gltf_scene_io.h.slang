@@ -142,7 +142,7 @@ This ensures the base block's offsets are stable regardless of which MAT_EXT_* f
 enabled — e.g. occlusionStrength, doubleSided, and the base texture slots always sit at
 the same position. Extension blocks are collapsed out of the struct when gated, shrinking
 the total size. The layout is NOT identical to upstream nvpro_core2; that's a deliberate
-trade-off for forkability (see docs/developer.md > Material System).
+trade-off for forkability.
 -------------------------------------------------------------------------------------------------*/
 struct GltfShadeMaterial
 {
