@@ -34,3 +34,6 @@ tests/resources/temp/
 *.benchmark
 
 _package/
+.idea
+build*
+cmake-build-*
