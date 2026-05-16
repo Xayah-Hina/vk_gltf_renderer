@@ -11,7 +11,6 @@ This project is developer-oriented: the **RTX path tracer** is the primary high-
 - [Source Code Structure](#source-code-structure)
 - [Material System](#material-system)
 - [Common Development Workflows](#common-development-workflows)
-- [Testing](#testing)
 - [Contributing](#contributing)
 
 For the internal data-flow walkthrough (Model -> RenderNodes -> GPU/TLAS), including how ray tracing acceleration structures are built, see [Rendering Architecture](RENDERING_ARCHITECTURE.md).
@@ -263,22 +262,6 @@ Use [RENDERING_ARCHITECTURE.md](RENDERING_ARCHITECTURE.md) as the source of trut
 - render-node dirty propagation
 - GPU buffer synchronization
 - TLAS/BLAS update invariants
-
----
-
-## Testing
-
-Tests are disabled by default. Enable with `BUILD_TESTING=ON`:
-
-```bash
-cmake -B build -DBUILD_TESTING=ON
-cmake --build build --target vk_gltf_renderer_tests
-ctest --test-dir build -C Release --output-on-failure
-```
-
-See [tests/README.md](../tests/README.md) for details.
-
----
 
 ## Contributing
 

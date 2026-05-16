@@ -39,31 +39,31 @@ The demo shows a short end-to-end workflow: switching renderer modes, tuning set
 | **OS** | Windows 10 / Linux | Windows 11 / Ubuntu 22.04+ |
 | **GPU** | NVIDIA RTX 20-series (Turing) | NVIDIA RTX 40-series (Ada) |
 | **Driver** | 535+ | Latest Game Ready / Studio |
-| **CMake** | 3.22 | 3.28+ |
-| **C++ Compiler** | C++20 (MSVC 2022 / GCC 12 / Clang 15) | MSVC 2022 17.8+ |
-| **Vulkan SDK** | 1.3 | [Latest](https://vulkan.lunarg.com/sdk/home) |
+| **CMake** | 4.3 | 4.3+ |
+| **C++ Compiler** | C++23 (MSVC 2022 / GCC 13 / Clang 17) | MSVC 2022 17.10+ |
+| **Vulkan SDK** | 1.4 | [Latest](https://vulkan.lunarg.com/sdk/home) |
 
 ### Quick start
 
 ```bash
 # Clone (repositories must be siblings)
 git clone https://github.com/nvpro-samples/nvpro_core2.git
-git clone https://github.com/nvpro-samples/vk_gltf_renderer.git
-cd vk_gltf_renderer
+git clone <repo-url> vk_gltf_renderer_rewrite
+cd vk_gltf_renderer_rewrite
 ```
 
 ```bash
-# Windows
-cmake -B build -S . -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Release
-.\_bin\Release\vk_gltf_renderer.exe
+# Windows (Developer PowerShell)
+cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+.\_bin\Release\vk_gltf_renderer_rewrite.exe
 ```
 
 ```bash
 # Linux
 cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build
-./_bin/vk_gltf_renderer
+./_bin/Release/vk_gltf_renderer_rewrite
 ```
 
 ### Common CMake options
@@ -73,7 +73,6 @@ cmake --build build
 | `USE_DLSS` | `ON` | Enable DLSS Ray Reconstruction integration |
 | `USE_OPTIX_DENOISER` | `ON` | Enable OptiX AI Denoiser (requires CUDA Toolkit) |
 | `USE_DRACO` | `ON` | Enable Draco mesh compression support |
-| `BUILD_TESTING` | `OFF` | Build unit tests and benchmarks |
 
 ## Features
 
@@ -150,7 +149,7 @@ For a **full walkthrough** of rendering modes, editor workflows, and feature scr
 ## Documentation
 
 - [User Guide](docs/user-guide.md) — ray tracing and rasterizer settings, PBR materials, scene editor, camera, environment, tone mapping, CLI reference, and troubleshooting.
-- [Developer Guide](docs/developer.md) — architecture overview, source structure, Vulkan ray tracing pipeline, testing, and contributor notes.
+- [Developer Guide](docs/developer.md) — architecture overview, source structure, Vulkan ray tracing pipeline, and contributor notes.
 - [Rendering Architecture](docs/RENDERING_ARCHITECTURE.md) — data flow from glTF model to GPU, BLAS/TLAS acceleration structures, and render nodes.
 - [glTF Resources](docs/resources.md) — curated collection of glTF models, HDR environments, specifications, and tools.
 

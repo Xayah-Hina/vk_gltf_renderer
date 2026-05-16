@@ -40,7 +40,6 @@
 
 #include "renderer.hpp"
 #include "docs/app_icon_png.h"
-#include "version.hpp"
 
 nvutils::ProfilerManager g_profilerManager;  // #PROFILER
 
@@ -278,7 +277,7 @@ auto main(int argc, char** argv) -> int
 
 
   // Application information
-  appInfo.name = fmt::format("{} {} ({})", nvutils::getExecutablePath().stem().string(), APP_VERSION_STRING, "Slang");
+  appInfo.name = fmt::format("{} ({})", nvutils::getExecutablePath().stem().string(), "Slang");
   appInfo.instance       = vkContext.getInstance();
   appInfo.device         = vkContext.getDevice();
   appInfo.physicalDevice = vkContext.getPhysicalDevice();

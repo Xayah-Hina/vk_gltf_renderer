@@ -47,7 +47,6 @@
 #include "gltf_animation_pointer.hpp"
 #include "gltf_scene_merger.hpp"
 #include "gltf_compact_model.hpp"
-#include "version.hpp"
 
 namespace {
 
@@ -525,7 +524,7 @@ bool nvvkgltf::Scene::save(const std::filesystem::path& filename)
   {
     if(!m_model.asset.generator.empty())
       m_model.asset.generator += " + ";
-    m_model.asset.generator += std::string(generatorPrefix) + " " APP_VERSION_STRING;
+    m_model.asset.generator += generatorPrefix;
   }
 
   // Save the glTF file

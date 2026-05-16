@@ -396,7 +396,7 @@ Repair or regenerate the model's tangent space when normal maps look incorrect o
 
 Press **F5** or use `Tools > Recompile Shaders` to hot-reload all Slang shaders without restarting the application. Shader source files in the `shaders/` directory are recompiled on-the-fly, making it ideal for rapid shader development and debugging.
 
-> **Note:** Hot-reload requires the Slang compiler and shader source files to be accessible at runtime (handled automatically by the build system's `copy_to_runtime_and_install`).
+> **Note:** Hot-reload requires the Slang compiler and shader source files to be accessible at runtime. The local build keeps shader paths available through the project runtime definitions.
 
 ### Exporting Images
 
@@ -567,7 +567,7 @@ usage: gltf-material-modifier.py [-h] [--metallic METALLIC] [--roughness ROUGHNE
 
 **Shader hot-reload fails (F5)**
 - Hot-reload requires the Slang compiler and shader source files to be accessible at runtime.
-- Verify the `shaders/` directory is present next to the executable (handled by `copy_to_runtime_and_install`).
+- Verify the `shaders/` directory is reachable from the source tree or present next to the executable.
 
 **Resetting UI layout**
 - Delete the `vk_gltf_renderer.ini` file next to the executable. It will be recreated with defaults on the next launch.
